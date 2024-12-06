@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div className="w-full h-screen bg-[#242A55] flex items-center justify-center">
       {
-        !isLogin ? <Login /> : <Signup />
+        !isLogin ? <Login setIsLogin={setIsLogin} /> : <Signup setIsLogin={setIsLogin} />
       }
     </div>
   )

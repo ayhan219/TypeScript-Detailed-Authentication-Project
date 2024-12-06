@@ -4,7 +4,13 @@ import { FcGoogle } from "react-icons/fc";
 import { FaTwitter } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 
-const Login = () => {
+
+type loginProps ={
+    setIsLogin: (value: boolean) => void;
+}
+
+
+const Login = ({setIsLogin}:loginProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -87,7 +93,7 @@ const Login = () => {
       </div>
       <div className="w-full h-auto flex justify-center pt-3 text-xl gap-2">
         <p className="text-[#818EAE]">Don't have an account?</p>
-        <span className="text-blue-500 font-semibold cursor-pointer">
+        <span onClick={()=>setIsLogin(true)} className="text-blue-500 font-semibold cursor-pointer">
           Signup
         </span>
       </div>
