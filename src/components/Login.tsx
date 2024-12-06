@@ -12,9 +12,7 @@ const Login = () => {
   };
   return (
     <div className="w-[40%] h-[80%] bg-[#242A55] ">
-      <div className="text-white text-3xl font-medium text-center ">
-        Sign Up
-      </div>
+      <div className="text-white text-3xl font-medium text-center ">Login</div>
       <div className="w-full h-28 flex gap-3 p-7">
         <div className="w-full h-16 bg-[#242A55] border border-white text-white flex p-3  items-center rounded-lg cursor-pointer">
           <div className="w-[30%] h-auto text-4xl ">
@@ -83,11 +81,15 @@ const Login = () => {
       </div>
 
       <div className="w-full h-16 p-7 flex items-center">
-        <button className="bg-[#4F65F1] w-full h-14 rounded-lg text-white">Sign Up</button>
+        <button className="bg-[#4F65F1] w-full h-14 rounded-lg text-white">
+          Login
+        </button>
       </div>
       <div className="w-full h-auto flex justify-center pt-3 text-xl gap-2">
-        <p className="text-[#818EAE]">Already have an account?</p>
-        <span className="text-blue-500 font-semibold cursor-pointer">Login</span>
+        <p className="text-[#818EAE]">Don't have an account?</p>
+        <span className="text-blue-500 font-semibold cursor-pointer">
+          Signup
+        </span>
       </div>
     </div>
   );
