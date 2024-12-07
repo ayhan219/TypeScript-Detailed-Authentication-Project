@@ -19,10 +19,8 @@ const Signup = ({ setIsLogin }: signupProps) => {
 
   const handleUsername = (usernameInput: string) => {
     setUsername(usernameInput);
-
-    // Kullanıcı adının sayı içerip içermediğini kontrol edin
     const hasNumber = /\d/.test(usernameInput);
-    setIsUsernameValid(hasNumber); // State güncelleniyor
+    setIsUsernameValid(hasNumber); 
   };
 
   return (
@@ -81,6 +79,9 @@ const Signup = ({ setIsLogin }: signupProps) => {
             } bg-[#242A55] outline-none border rounded-md`}
             type="text"
           />
+           {username !== "" && !isUsernameValid && (
+    <p className="text-red-600">Add a number</p>
+  )}
         </div>
 
         {/* Email */}
