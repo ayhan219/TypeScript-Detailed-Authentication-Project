@@ -3,6 +3,8 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaTwitter } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
+import { BiSolidCommentError } from "react-icons/bi";
+import ReactTooltip from "react-tooltip";
 
 type signupProps = {
   setIsLogin: (value: boolean) => void;
@@ -20,7 +22,7 @@ const Signup = ({ setIsLogin }: signupProps) => {
   const handleUsername = (usernameInput: string) => {
     setUsername(usernameInput);
     const hasNumber = /\d/.test(usernameInput);
-    setIsUsernameValid(hasNumber); 
+    setIsUsernameValid(hasNumber);
   };
 
   return (
@@ -68,8 +70,13 @@ const Signup = ({ setIsLogin }: signupProps) => {
       {/* Form Inputs */}
       <div className="w-full h-auto flex flex-col gap-6">
         {/* Name */}
-        <div className="w-full flex flex-col gap-2 text-white">
+        <div className="w-full flex flex-col gap-2 text-white relative">
+          <div className="flex justify-between">
           <span className="text-xl font-semibold">Username</span>
+          {!isUsernameValid && username !== "" &&(
+            <span className="text-red-600">Username must contain at least one number</span>
+          )}
+          </div>
           <input
             onChange={(e) => handleUsername(e.target.value)}
             className={`w-full h-12 p-3 ${
@@ -79,9 +86,15 @@ const Signup = ({ setIsLogin }: signupProps) => {
             } bg-[#242A55] outline-none border rounded-md`}
             type="text"
           />
-           {username !== "" && !isUsernameValid && (
-    <p className="text-red-600">Add a number</p>
-  )}
+          {/* Error Icon with Tooltip */}
+          {!isUsernameValid && username !== "" && (
+            <div
+              className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
+              title="Username must contain at least one number"
+            >
+              <BiSolidCommentError />
+            </div>
+          )}
         </div>
 
         {/* Email */}
