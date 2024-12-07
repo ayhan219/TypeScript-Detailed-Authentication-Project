@@ -4,19 +4,29 @@ import { FcGoogle } from "react-icons/fc";
 import { FaTwitter } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 
-type signupProps ={
+type signupProps = {
   setIsLogin: (value: boolean) => void;
-}
+};
 
-const Signup = ({setIsLogin}:signupProps) => {
-  const [isChecked, setIsChecked] = useState(false);
+const Signup = ({ setIsLogin }: signupProps) => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>("");
+  const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
 
+  const handleUsername = (usernameInput: string) => {
+    setUsername(usernameInput);
+
+    // Kullanıcı adının sayı içerip içermediğini kontrol edin
+    const hasNumber = /\d/.test(usernameInput);
+    setIsUsernameValid(hasNumber); // State güncelleniyor
+  };
+
   return (
-    <div className="w-[40%] h-[90%] bg-[#242A55] p-6 rounded-lg shadow-lg animate-slideDown">
+    <div className="w-[40%] h-[90%] bg-[#242A55] p-6 rounded-lg  animate-slideDown">
       {/* Title */}
       <div className="text-white text-3xl font-medium text-center mb-6">
         Signup
@@ -61,9 +71,14 @@ const Signup = ({setIsLogin}:signupProps) => {
       <div className="w-full h-auto flex flex-col gap-6">
         {/* Name */}
         <div className="w-full flex flex-col gap-2 text-white">
-          <span className="text-xl font-semibold">Name</span>
+          <span className="text-xl font-semibold">Username</span>
           <input
-            className="w-full h-12 p-3 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
+            onChange={(e) => handleUsername(e.target.value)}
+            className={`w-full h-12 p-3 ${
+              !isUsernameValid && username !== ""
+                ? "border-red-600 focus:border-red-600"
+                : "border-gray-400 focus:border-white"
+            } bg-[#242A55] outline-none border rounded-md`}
             type="text"
           />
         </div>
@@ -80,6 +95,15 @@ const Signup = ({setIsLogin}:signupProps) => {
         {/* Password */}
         <div className="w-full flex flex-col gap-2 text-white">
           <span className="text-xl font-semibold">Password</span>
+          <input
+            className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
+            type="password"
+          />
+        </div>
+
+        {/* rePassword */}
+        <div className="w-full flex flex-col gap-2 text-white">
+          <span className="text-xl font-semibold">Confirm Password</span>
           <input
             className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
             type="password"
@@ -116,7 +140,10 @@ const Signup = ({setIsLogin}:signupProps) => {
       {/* Login Navigation */}
       <div className="w-full h-auto flex justify-center pt-3 text-xl gap-2">
         <p className="text-[#818EAE]">Already have an account?</p>
-        <span onClick={()=>setIsLogin(false)} className="text-blue-500 font-semibold cursor-pointer">
+        <span
+          onClick={() => setIsLogin(false)}
+          className="text-blue-500 font-semibold cursor-pointer"
+        >
           Login
         </span>
       </div>

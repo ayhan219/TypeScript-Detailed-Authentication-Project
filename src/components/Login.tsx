@@ -17,7 +17,7 @@ const Login = ({setIsLogin}:loginProps) => {
     setIsChecked(!isChecked);
   };
   return (
-    <div className="w-[40%] h-[80%] bg-[#242A55] ">
+    <div className="w-[40%] h-[80%] bg-[#242A55] animate-slideDown ">
       <div className="text-white text-3xl font-medium text-center ">Login</div>
       <div className="w-full h-28 flex gap-3 p-7">
         <div className="w-full h-16 bg-[#242A55] border border-white text-white flex p-3  items-center rounded-lg cursor-pointer">
