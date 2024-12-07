@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaTwitter } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { BiSolidCommentError } from "react-icons/bi";
-import ReactTooltip from "react-tooltip";
+import { TiTick } from "react-icons/ti";
 
 type signupProps = {
   setIsLogin: (value: boolean) => void;
@@ -12,6 +12,7 @@ type signupProps = {
 
 const Signup = ({ setIsLogin }: signupProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+
   const [username, setUsername] = useState<string>("");
   const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
 
@@ -53,6 +54,20 @@ const Signup = ({ setIsLogin }: signupProps) => {
   const handleRePassword = (rePasswordInput: string) => {
     setRePassword(rePasswordInput);
     setIsPasswordMatch(password === rePasswordInput);
+  };
+
+  const handleSubmit = () => {
+    if (
+      isUsernameValid &&
+      isEmailValid &&
+      isPasswordValid &&
+      isPasswordMatch &&
+      isChecked
+    ) {
+      alert("signup successfull!");
+    } else {
+      alert("error while signup");
+    }
   };
 
   return (
@@ -121,13 +136,23 @@ const Signup = ({ setIsLogin }: signupProps) => {
             type="text"
           />
           {/* Error Icon with Tooltip */}
-          {!isUsernameValid && username !== "" && (
+          {isUsernameValid && username !== "" ? (
             <div
-              className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
-              title="Username must contain at least one number"
+              className="absolute text-2xl text-green-600 right-0 top-12 mr-2 cursor-pointer"
+              title="Username is valid"
             >
-              <BiSolidCommentError />
+              <TiTick />
             </div>
+          ) : (
+            !isUsernameValid &&
+            username !== "" && (
+              <div
+                className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
+                title="Username must contain at least one number"
+              >
+                <BiSolidCommentError />
+              </div>
+            )
           )}
         </div>
 
@@ -152,13 +177,23 @@ const Signup = ({ setIsLogin }: signupProps) => {
           />
 
           {/* Error Icon with Tooltip */}
-          {!isEmailValid && email !== "" && (
+          {isEmailValid && email !== "" ? (
             <div
-              className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
-              title="Invalid Email"
+              className="absolute text-2xl text-green-600 right-0 top-12 mr-2 cursor-pointer"
+              title="Username is valid"
             >
-              <BiSolidCommentError />
+              <TiTick />
             </div>
+          ) : (
+            !isEmailValid &&
+            email !== "" && (
+              <div
+                className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
+                title="Invalid Email"
+              >
+                <BiSolidCommentError />
+              </div>
+            )
           )}
         </div>
 
@@ -181,10 +216,29 @@ const Signup = ({ setIsLogin }: signupProps) => {
             } bg-[#242A55] outline-none border rounded-md`}
             type="password"
           />
+
+          {isPasswordValid && password !== "" ? (
+            <div
+              className="absolute text-2xl text-green-600 right-0 top-12 mr-2 cursor-pointer"
+              title="Username is valid"
+            >
+              <TiTick />
+            </div>
+          ) : (
+            !isPasswordValid &&
+            password !== "" && (
+              <div
+                className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
+                title="Invalid Password"
+              >
+                <BiSolidCommentError />
+              </div>
+            )
+          )}
         </div>
 
         {/* rePassword */}
-        <div className="w-full flex flex-col gap-2 text-white">
+        <div className="w-full flex flex-col gap-2 text-white relative">
           <div className="flex justify-between">
             <span className="text-xl font-semibold">Confirm Password</span>
             {!isPasswordMatch && rePassword !== "" && (
@@ -202,6 +256,25 @@ const Signup = ({ setIsLogin }: signupProps) => {
             } bg-[#242A55] outline-none border rounded-md`}
             type="password"
           />
+
+          {!isPasswordMatch && rePassword !== "" ? (
+            <div
+              className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
+              title="Invalid Password"
+            >
+              <BiSolidCommentError />
+            </div>
+          ) : (
+            isPasswordMatch &&
+            rePassword !== "" && (
+              <div
+                className="absolute text-2xl text-green-600 right-0 top-12 mr-2 cursor-pointer"
+                title="Username is valid"
+              >
+                <TiTick />
+              </div>
+            )
+          )}
         </div>
       </div>
 
@@ -226,7 +299,10 @@ const Signup = ({ setIsLogin }: signupProps) => {
 
       {/* Signup Button */}
       <div className="w-full h-16 flex items-center">
-        <button className="bg-[#4F65F1] w-full h-14 rounded-lg text-white">
+        <button
+          onClick={() => handleSubmit()}
+          className="bg-[#4F65F1] w-full h-14 rounded-lg text-white"
+        >
           Signup
         </button>
       </div>
