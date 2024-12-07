@@ -114,6 +114,8 @@ const Signup = ({ setIsLogin }: signupProps) => {
             className={`w-full h-12 p-3 ${
               !isUsernameValid && username !== ""
                 ? "border-red-600 focus:border-red-600"
+                : isUsernameValid && username !== ""
+                ? "border-green-600 focus:border-green-600"
                 : "border-gray-400 focus:border-white"
             } bg-[#242A55] outline-none border rounded-md`}
             type="text"
@@ -142,6 +144,8 @@ const Signup = ({ setIsLogin }: signupProps) => {
             className={`w-full h-12 p-3 ${
               !isEmailValid && email !== ""
                 ? "border-red-600 focus:border-red-600"
+                : isEmailValid && email !== ""
+                ? "border-green-600 focus:border-green-600"
                 : "border-gray-400 focus:border-white"
             } bg-[#242A55] outline-none border rounded-md`}
             type="text"
@@ -171,6 +175,8 @@ const Signup = ({ setIsLogin }: signupProps) => {
             className={`w-full h-12 p-3 ${
               !isPasswordValid && password !== ""
                 ? "border-red-600 focus:border-red-600"
+                : isPasswordValid && password !== ""
+                ? "border-green-600 focus:border-green-600"
                 : "border-gray-400 focus:border-white"
             } bg-[#242A55] outline-none border rounded-md`}
             type="password"
@@ -179,7 +185,7 @@ const Signup = ({ setIsLogin }: signupProps) => {
 
         {/* rePassword */}
         <div className="w-full flex flex-col gap-2 text-white">
-        <div className="flex justify-between">
+          <div className="flex justify-between">
             <span className="text-xl font-semibold">Confirm Password</span>
             {!isPasswordMatch && rePassword !== "" && (
               <span className="text-red-600">Password does not match</span>
@@ -190,6 +196,8 @@ const Signup = ({ setIsLogin }: signupProps) => {
             className={`w-full p-3 h-12 ${
               !isPasswordMatch && rePassword !== ""
                 ? "border-red-600 focus:border-red-600"
+                : isPasswordMatch && rePassword !== ""
+                ? "border-green-600 focus:border-green-600"
                 : "border-gray-400 focus:border-white"
             } bg-[#242A55] outline-none border rounded-md`}
             type="password"
