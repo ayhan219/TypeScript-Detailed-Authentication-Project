@@ -15,8 +15,14 @@ const Signup = ({ setIsLogin }: signupProps) => {
   const [username, setUsername] = useState<string>("");
   const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
 
-  const [email,setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
+
+  const [password, setPassword] = useState<string>("");
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
+
+  const [rePassword, setRePassword] = useState<string>("");
+  const [isPasswordMatch, setIsPasswordMatch] = useState<boolean>(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -28,11 +34,26 @@ const Signup = ({ setIsLogin }: signupProps) => {
     setIsUsernameValid(hasNumber);
   };
 
-  const handleEmail = (emailInput:string)=>{
+  const handleEmail = (emailInput: string) => {
     setEmail(emailInput);
-    const hasValidInput = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput);
+    const hasValidInput =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput);
     setIsEmailValid(hasValidInput);
-  }
+  };
+
+  const handlePassword = (passwordInput: string) => {
+    setPassword(passwordInput);
+    const hasValidPassword =
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/.test(
+        passwordInput
+      );
+    setIsPasswordValid(hasValidPassword);
+  };
+
+  const handleRePassword = (rePasswordInput: string) => {
+    setRePassword(rePasswordInput);
+    setIsPasswordMatch(password === rePasswordInput);
+  };
 
   return (
     <div className="w-[40%] h-[90%] bg-[#242A55] p-6 rounded-lg  animate-slideDown">
@@ -81,10 +102,12 @@ const Signup = ({ setIsLogin }: signupProps) => {
         {/* Name */}
         <div className="w-full flex flex-col gap-2 text-white relative">
           <div className="flex justify-between">
-          <span className="text-xl font-semibold">Username</span>
-          {!isUsernameValid && username !== "" &&(
-            <span className="text-red-600">Username must contain at least one number</span>
-          )}
+            <span className="text-xl font-semibold">Username</span>
+            {!isUsernameValid && username !== "" && (
+              <span className="text-red-600">
+                Username must contain at least one number
+              </span>
+            )}
           </div>
           <input
             onChange={(e) => handleUsername(e.target.value)}
@@ -108,11 +131,11 @@ const Signup = ({ setIsLogin }: signupProps) => {
 
         {/* Email */}
         <div className="w-full flex flex-col gap-2 text-white relative">
-        <div className="flex justify-between">
-          <span className="text-xl font-semibold">Email</span>
-          {!isEmailValid && email !== "" &&(
-            <span className="text-red-600">Invalid Email</span>
-          )}
+          <div className="flex justify-between">
+            <span className="text-xl font-semibold">Email</span>
+            {!isEmailValid && email !== "" && (
+              <span className="text-red-600">Invalid Email</span>
+            )}
           </div>
           <input
             onChange={(e) => handleEmail(e.target.value)}
@@ -136,19 +159,39 @@ const Signup = ({ setIsLogin }: signupProps) => {
         </div>
 
         {/* Password */}
-        <div className="w-full flex flex-col gap-2 text-white">
-          <span className="text-xl font-semibold">Password</span>
+        <div className="w-full flex flex-col gap-2 text-white relative">
+          <div className="flex justify-between">
+            <span className="text-xl font-semibold">Password</span>
+            {!isPasswordValid && password !== "" && (
+              <span className="text-red-600">Invalid Password</span>
+            )}
+          </div>
           <input
-            className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
+            onChange={(e) => handlePassword(e.target.value)}
+            className={`w-full h-12 p-3 ${
+              !isPasswordValid && password !== ""
+                ? "border-red-600 focus:border-red-600"
+                : "border-gray-400 focus:border-white"
+            } bg-[#242A55] outline-none border rounded-md`}
             type="password"
           />
         </div>
 
         {/* rePassword */}
         <div className="w-full flex flex-col gap-2 text-white">
-          <span className="text-xl font-semibold">Confirm Password</span>
+        <div className="flex justify-between">
+            <span className="text-xl font-semibold">Confirm Password</span>
+            {!isPasswordMatch && rePassword !== "" && (
+              <span className="text-red-600">Password does not match</span>
+            )}
+          </div>
           <input
-            className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
+            onChange={(e) => handleRePassword(e.target.value)}
+            className={`w-full p-3 h-12 ${
+              !isPasswordMatch && rePassword !== ""
+                ? "border-red-600 focus:border-red-600"
+                : "border-gray-400 focus:border-white"
+            } bg-[#242A55] outline-none border rounded-md`}
             type="password"
           />
         </div>
