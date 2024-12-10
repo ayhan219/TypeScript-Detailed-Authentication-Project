@@ -35,6 +35,15 @@ const Login = ({ setIsLogin }: loginProps) => {
     setIsEmailValid(hasValidInput);
   };
 
+  const handleSubmit = ()=>{
+    if(!isChecked && !isEmailValid){
+      alert("error")
+    }
+    else{
+      alert("login successfull!");
+    }
+  }
+
 
   
   return (
@@ -148,7 +157,7 @@ const Login = ({ setIsLogin }: loginProps) => {
       </div>
 
       <div className="w-full h-16 p-7 flex items-center">
-        <button className="bg-[#4F65F1] w-full h-14 rounded-lg text-white">
+        <button onClick={()=>handleSubmit()} className="bg-[#4F65F1] w-full h-14 rounded-lg text-white">
           Login
         </button>
       </div>
