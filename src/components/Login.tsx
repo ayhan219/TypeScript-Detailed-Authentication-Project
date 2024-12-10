@@ -65,8 +65,9 @@ const Login = ({setIsLogin}:loginProps) => {
         <div className="w-full h-[0.10rem] bg-gradient-to-l from-transparent to-gray-400"></div>
       </div>
 
-     {/* Email */}
-     <div className="w-full flex flex-col gap-2 text-white relative">
+      <div className="w-full h-auto p-7 flex flex-col gap-6">
+        {/* Email */}
+        <div className="w-full flex flex-col gap-2 text-white relative">
           <div className="flex justify-between">
             <span className="text-xl font-semibold">Email</span>
             {!isEmailValid && email !== "" && (
@@ -105,6 +106,14 @@ const Login = ({setIsLogin}:loginProps) => {
             )
           )}
         </div>
+        <div className="w-full flex flex-col gap-2 text-white">
+          <span className="text-xl font-semibold">Password</span>
+          <input
+            className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
+            type="password"
+          />
+        </div>
+      </div>
 
       <div className="w-full h-auto flex  p-7">
         <div
