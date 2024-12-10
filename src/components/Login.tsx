@@ -5,20 +5,20 @@ import { FaTwitter } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { BiSolidCommentError } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
+type loginProps = {
+  setIsLogin: (value: boolean) => void;
+};
 
-type loginProps ={
-    setIsLogin: (value: boolean) => void;
-}
-
-
-const Login = ({setIsLogin}:loginProps) => {
+const Login = ({ setIsLogin }: loginProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
-
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -106,12 +106,17 @@ const Login = ({setIsLogin}:loginProps) => {
             )
           )}
         </div>
-        <div className="w-full flex flex-col gap-2 text-white">
+        <div className="w-full flex flex-col gap-2 text-white relative">
           <span className="text-xl font-semibold">Password</span>
           <input
             className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
-            type="password"
+            type={`${!showPassword ? "password": "text"}`}
           />
+          {!showPassword ? (
+            <FaEye onClick={()=>setShowPassword(!showPassword)} className=" text-xl absolute right-0 top-12 mr-3 cursor-pointer" />
+          ) : (
+            <FaEyeSlash onClick={()=>setShowPassword(!showPassword)} className=" text-xl absolute right-0 top-12 mr-3 cursor-pointer" />
+          )}
         </div>
       </div>
 
@@ -140,7 +145,10 @@ const Login = ({setIsLogin}:loginProps) => {
       </div>
       <div className="w-full h-auto flex justify-center pt-3 text-xl gap-2">
         <p className="text-[#818EAE]">Don't have an account?</p>
-        <span onClick={()=>setIsLogin(true)} className="text-blue-500 font-semibold cursor-pointer">
+        <span
+          onClick={() => setIsLogin(true)}
+          className="text-blue-500 font-semibold cursor-pointer"
+        >
           Signup
         </span>
       </div>
