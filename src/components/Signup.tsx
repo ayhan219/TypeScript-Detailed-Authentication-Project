@@ -71,7 +71,7 @@ const Signup = ({ setIsLogin }: signupProps) => {
   };
 
   return (
-    <div className="w-[40%] h-[90%] bg-[#242A55] p-6 rounded-lg  animate-slideDown">
+    <div className="w-[40%] h-[90%] bg-[#242A55]  rounded-lg  animate-slideDown">
       {/* Title */}
       <div className="text-white text-3xl font-medium text-center mb-6">
         Signup
