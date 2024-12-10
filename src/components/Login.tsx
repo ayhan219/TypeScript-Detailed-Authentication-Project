@@ -3,6 +3,8 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaTwitter } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
+import { BiSolidCommentError } from "react-icons/bi";
+import { TiTick } from "react-icons/ti";
 
 
 type loginProps ={
@@ -13,8 +15,20 @@ type loginProps ={
 const Login = ({setIsLogin}:loginProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
+
+  const [email, setEmail] = useState<string>("");
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
+
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleEmail = (emailInput: string) => {
+    setEmail(emailInput);
+    const hasValidInput =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput);
+    setIsEmailValid(hasValidInput);
   };
   return (
     <div className="w-[40%] h-[80%] bg-[#242A55] animate-slideDown ">
@@ -51,22 +65,46 @@ const Login = ({setIsLogin}:loginProps) => {
         <div className="w-full h-[0.10rem] bg-gradient-to-l from-transparent to-gray-400"></div>
       </div>
 
-      <div className="w-full h-auto p-7 flex flex-col gap-6">
-        <div className="w-full flex flex-col gap-2 text-white">
-          <span className="text-xl font-semibold">Email</span>
+     {/* Email */}
+     <div className="w-full flex flex-col gap-2 text-white relative">
+          <div className="flex justify-between">
+            <span className="text-xl font-semibold">Email</span>
+            {!isEmailValid && email !== "" && (
+              <span className="text-red-600">Invalid Email</span>
+            )}
+          </div>
           <input
-            className="w-full h-12 p-3 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
+            onChange={(e) => handleEmail(e.target.value)}
+            className={`w-full h-12 p-3 ${
+              !isEmailValid && email !== ""
+                ? "border-red-600 focus:border-red-600"
+                : isEmailValid && email !== ""
+                ? "border-green-600 focus:border-green-600"
+                : "border-gray-400 focus:border-white"
+            } bg-[#242A55] outline-none border rounded-md`}
             type="text"
           />
+
+          {/* Error Icon with Tooltip */}
+          {isEmailValid && email !== "" ? (
+            <div
+              className="absolute text-2xl text-green-600 right-0 top-12 mr-2 cursor-pointer"
+              title="Username is valid"
+            >
+              <TiTick />
+            </div>
+          ) : (
+            !isEmailValid &&
+            email !== "" && (
+              <div
+                className="absolute text-2xl text-red-600 right-0 top-12 mr-2 cursor-pointer"
+                title="Invalid Email"
+              >
+                <BiSolidCommentError />
+              </div>
+            )
+          )}
         </div>
-        <div className="w-full flex flex-col gap-2 text-white">
-          <span className="text-xl font-semibold">Password</span>
-          <input
-            className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
-            type="password"
-          />
-        </div>
-      </div>
 
       <div className="w-full h-auto flex  p-7">
         <div
