@@ -20,6 +20,10 @@ const Login = ({ setIsLogin }: loginProps) => {
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
 
+
+  const [password,setPassword] = useState<string>("");
+
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -30,6 +34,9 @@ const Login = ({ setIsLogin }: loginProps) => {
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput);
     setIsEmailValid(hasValidInput);
   };
+
+
+  
   return (
     <div className="w-[40%] h-[80%] bg-[#242A55] animate-slideDown ">
       <div className="text-white text-3xl font-medium text-center ">Login</div>
@@ -109,6 +116,8 @@ const Login = ({ setIsLogin }: loginProps) => {
         <div className="w-full flex flex-col gap-2 text-white relative">
           <span className="text-xl font-semibold">Password</span>
           <input
+          onChange={(e)=>setPassword(e.target.value)}
+          value={password}
             className="w-full p-3 h-12 bg-[#242A55] outline-none border border-gray-400 focus:border-white rounded-md"
             type={`${!showPassword ? "password": "text"}`}
           />
